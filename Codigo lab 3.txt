@@ -1,0 +1,314 @@
+comienzo:
+	cbi portb,0
+    ldi	r16, 0x00
+	ldi	r17, 0xff
+	ldi r19, 0
+	out	ddrc, r17
+	out	ddrb, r16
+	out ddrd, r16
+	in	r16, pinc
+	cpi r16, 0
+	breq start
+    cpi r16, 1
+	breq proa
+	cpi r16, 2
+	breq prod
+	rjmp comienzo
+proa:
+	call incremento
+	rjmp comienzo
+prod:
+	call decremento
+	rjmp comienzo
+incremento:
+	ldi r19, 1
+	ldi r18, 0x1f ;0001 1111
+	out portd, r18
+	mas:
+		ldi r16, 0x3f ; 0011 1111
+		out ddrb, r16
+		out portb, r16
+		ldi r17, 0xff
+		call BUCLEA
+		ldi r16, 0x06 ; 0000 0110
+		out ddrb, r16
+		out portb, r16
+		call BUCLEA
+		ldi r16, 0x5b ; 0101 1011
+		out ddrb, r16
+		out ddrd, r16
+		out portb, r16
+		out portd, r16
+		call BUCLEA
+		ldi r16, 0x4f ; 0100 1111
+		out ddrb, r16
+		out ddrd, r16
+		out portb, r16
+		out portd, r16
+		call BUCLEA
+		ldi r16, 0x66 ; 0110 0110
+		out ddrb, r16
+		out ddrd, r16
+		out portb, r16
+		out portd, r16
+		call BUCLEA
+		ldi r16, 0x6d ; 0110 1101
+		out ddrb, r16
+		out ddrd, r16
+		out portb, r16
+		out portd, r16
+		call BUCLEA
+		ldi r16, 0x7d ; 0111 1101
+		out ddrb, r16
+		out ddrd, r16
+		out portb, r16
+		out portd, r16
+		call BUCLEA
+		ldi r16, 0x07 ; 0000 0111
+		out ddrb, r16
+		out portb, r16
+		call BUCLEA
+		ldi r16, 0x7f ; 0111 1111
+		out ddrb, r16
+		out ddrd, r16
+		out portb, r16
+		out portd, r16
+		call BUCLEA
+		ldi r16, 0x6f ; 0110 1111
+		out ddrb, r16
+		out ddrd, r16
+		out portb, r16
+		out portd, r16
+		call BUCLEA
+
+		cpi r19, 1
+		breq unoa
+		cpi r19, 2
+		breq dosa
+		cpi r19, 3
+		breq tresa
+		cpi r19, 4
+		breq cuatroa
+		cpi r19, 5
+		breq cincoa
+		cpi r19, 6
+		breq seisa
+		cpi r19, 7
+		breq sietea
+		cpi r19, 8
+		breq ochoa
+		cpi r19, 9
+		breq nuevea
+	
+		rjmp incremento
+		branch:
+		 rjmp decremento
+		unoa:	
+			ldi r18, 0x06 ; 0000 0110
+			out portd, r18
+			inc r19
+			rjmp mas
+		dosa:
+			ldi r18, 0x5b ; 0101 1011
+			out portd, r18
+			inc r19
+			rjmp mas
+		tresa:
+			ldi r18, 0x4f ; 0100 1111
+			out portd, r18
+			inc r19
+			rjmp mas
+		cuatroa:
+			ldi r18, 0x66 ; 0110 0110
+			out portd, r18
+			inc r19
+			rjmp mas
+		cincoa:
+			ldi r18, 0x6d ; 0110 1101
+			out portd, r18
+			inc r19
+			rjmp mas
+		seisa:
+			ldi r18, 0x7d ; 0111 1101
+			out portd, r18
+			inc r19
+			rjmp mas
+		sietea:
+			ldi r18, 0x07 ; 0000 0111
+			out portd, r18
+			inc r19
+			rjmp mas
+		ochoa:
+			ldi r18, 0x7f ; 0111 1111
+			out portd, r18
+			inc r19
+			rjmp mas
+		nuevea:
+			ldi r18, 0x6f ; 0110 1111
+			out portd, r18
+			inc r19
+			rjmp incremento
+decremento:
+	ldi r19, 8
+	ldi r18, 0x6f ; 0110 1111
+	out portd, r18
+	menos:
+		ldi r16, 0x6f ; 0110 1111
+		out ddrb, r16
+		out ddrd, r16
+		out portb, r16
+		out portd, r16
+		ldi r17, 0xff
+		call BUCLED
+		ldi r16, 0x7f ; 0111 1111
+		out ddrb, r16
+		out ddrd, r16
+		out portb, r16
+		out portd, r16
+		call BUCLED
+		ldi r16, 0x07 ; 0000 0111
+		out ddrb, r16
+		out portb, r16
+		call BUCLED
+		ldi r16, 0x7d ; 0111 1101
+		out ddrb, r16
+		out ddrd, r16
+		out portb, r16
+		out portd, r16
+		call BUCLED
+		ldi r16, 0x6d ; 0110 1101
+		out ddrb, r16
+		out ddrd, r16
+		out portb, r16
+		out portd, r16
+		call BUCLED
+		ldi r16, 0x66 ; 0110 0110
+		out ddrb, r16
+		out ddrd, r16
+		out portb, r16
+		out portd, r16
+		call BUCLED
+		ldi r16, 0x4f ; 0100 1111
+		out ddrb, r16
+		out ddrd, r16
+		out portb, r16
+		out portd, r16
+		call BUCLED
+		ldi r16, 0x5b ; 0101 1011
+		out ddrb, r16
+		out ddrd, r16
+		out portb, r16
+		out portd, r16
+		call BUCLED
+		ldi r16, 0x06 ; 0000 0110
+		out ddrb, r16
+		out portb, r16
+		call BUCLED
+		ldi r16, 0x3f ; 0011 1111
+		out ddrb, r16
+		out ddrd, r16
+		out portb, r16
+		out portd, r16
+		call BUCLED
+
+		
+		cpi r19, 0
+		breq cerod
+		cpi r19, 1
+		breq unod
+		cpi r19, 2
+		breq dosd
+		cpi r19, 3
+		breq tresd
+		cpi r19, 4
+		breq cuatrod
+		cpi r19, 5
+		breq cincod
+		cpi r19, 6
+		breq seisd
+		cpi r19, 7
+		breq sieted
+		cpi r19, 8
+		breq vd	
+		rjmp menos
+		vd:
+		call decremento
+
+		cerod:
+			ldi r18, 0x1f ; 0110 1111
+			out portd, r18
+			dec r19
+			rjmp menos
+		unod:	
+			ldi r18, 0x06 ; 0000 0110
+			out portd, r18
+			dec r19
+			rjmp menos
+		dosd:
+			ldi r18, 0x5b ; 0101 1011
+			out portd, r18
+			dec r19
+			rjmp menos
+		tresd:
+			ldi r18, 0x4f ; 0100 1111
+			out portd, r18
+			dec r19
+			rjmp menos
+		cuatrod:
+			ldi r18, 0x66 ; 0110 0110
+			out portd, r18
+			dec r19
+			rjmp menos
+		cincod:
+			ldi r18, 0x6d ; 0110 1101
+			out portd, r18
+			dec r19
+			rjmp menos
+		seisd:
+			ldi r18, 0x7d ; 0111 1101
+			out portd, r18
+			dec r19
+			rjmp menos
+		sieted:
+			ldi r18, 0x07 ; 0000 0111
+			out portd, r18
+			dec r19
+			rjmp menos
+		ochod:
+			ldi r18, 0x7f ; 0111 1111
+			out portd, r18
+			inc r19
+			rjmp menos
+	
+BUCLEA:
+	ldi r20, 0xff
+	BUCLEA1:
+		ldi r21, 0xff
+		BUCLEA2:
+			ldi r22, 0x52
+			BUCLEA3:				
+				dec r22
+				brne BUCLEA3
+				dec r21
+				brne BUCLEA2
+				dec r20
+				brne BUCLEA1
+ret
+BUCLED:
+	ldi r20, 0xff
+	BUCLED1:
+		ldi r21, 0xff
+		BUCLED2:
+			ldi r22, 0x52
+			BUCLED3:		
+				dec r22
+				brne BUCLED3
+				dec r21
+				brne BUCLED2
+				dec r20
+				brne BUCLED1
+ret
+
+				dec r20
+				brne DELAYD1
+ret
